@@ -13,12 +13,6 @@ OpenTelemetry::SDK.configure do |config|
     )
   )
   
-  # RailsとActive Recordの自動インストルメンテーション
+  # 自動インストルメンテーション
   config.use_all
-  #config.use 'OpenTelemetry::Instrumentation::PG'
-  #config.use 'OpenTelemetry::Instrumentation::Rails'
-  #config.use 'OpenTelemetry::Instrumentation::ActiveRecord'
-  #config.use 'OpenTelemetry::Instrumentation::ActiveRecord', {
-  #  enable_sql_obfuscation: false # クエリ内容の隠蔽を無効化
-  #}
 end

@@ -1,0 +1,24 @@
+<h1>Blog Posts</h1>
+
+<h2>All Posts</h2>
+<% @all_posts.each do |post| %>
+  <p><strong><%= post.title %></strong>: <%= post.content %></p>
+<% end %>
+
+<h2>Published Posts</h2>
+<% @published_posts.each do |post| %>
+  <p><strong><%= post.title %></strong>: Published at <%= post.published_at %></p>
+<% end %>
+
+<h2>Posts with Comments</h2>
+<% @posts_with_comments.each do |post| %>
+  <p><strong><%= post.title %></strong>: <%= post.comments.count %> comments</p>
+<% end %>
+
+<h2>Posts Count</h2>
+<p>Total Posts: <%= @posts_count %></p>
+
+<h2>Comments Count per Post</h2>
+<% @comments_count_per_post.each do |post_id, count| %>
+  <p>Post ID <%= post_id %>: <%= count %> comments</p>
+<% end %>

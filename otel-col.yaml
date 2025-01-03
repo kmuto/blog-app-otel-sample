@@ -1,0 +1,32 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+
+exporters:
+  logging:
+    loglevel: debug
+  otlphttp/vaxila:
+    endpoint: https://otlp-vaxila.mackerelio.com
+    compression: gzip
+    headers:
+      Mackerel-Api-Key: ${env:MACKEREL_VAXILA_APIKEY}
+
+processors:
+  batch:
+    timeout: 15s
+    send_batch_size: 5000
+    send_batch_max_size: 5000
+  resource/namespace:
+    attributes:
+    - key: service.namespace
+      value: "kmuto/slowquery-demo"
+      action: upsert
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [resource/namespace, batch]
+      exporters: [logging, otlphttp/vaxila]
